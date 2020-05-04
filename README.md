@@ -47,8 +47,8 @@ $ docker-compose up
 #### Note: The above command will take time the first time to run.
 
 ## Postman Collection:
-
 Postman collection is present in the postman folder, which can be imported in Postman applicaion.
+
 ---
 
 # Project Architecture:
