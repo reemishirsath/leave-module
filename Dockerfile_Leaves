@@ -1,0 +1,13 @@
+FROM golang:1.13
+
+ENV GO111MODULE=on
+ENV CGO_ENABLED=0 
+ENV GOOS=linux
+
+RUN mkdir -p /go/src/github.com/reemishirsath/leave-module
+ADD .     /go/src/github.com/reemishirsath/leave-module/
+WORKDIR /go/src/github.com/reemishirsath/leave-module/services/leave
+
+RUN go get  github.com/canthefason/go-watcher
+RUN go install github.com/canthefason/go-watcher/cmd/watcher
+ENTRYPOINT watcher -run github.com/reemishirsath/leave-module/services/leave/cmd -watch github.com/reemishirsath/leave-module/services/leave

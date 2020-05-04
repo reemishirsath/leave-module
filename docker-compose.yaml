@@ -1,0 +1,59 @@
+version: '3'
+services:
+  db:
+      build:
+        context: .
+        dockerfile: database/Dockerfile
+      environment:
+        MYSQL_ROOT_PASSWORD: "password"
+        MYSQL_DATABASE: "leaves_module"
+        MYSQL_USER: "test_user"
+        MYSQL_PASSWORD: "test_password"
+      container_name: "mysql_leaves_db"
+      restart: always
+      ports:
+      - "3307:3306"
+      tty: true
+      volumes:
+        - leaves_module-db:/var/lib/mysql
+      
+  user:
+      build:
+        context: .
+        dockerfile: Dockerfile_User
+      environment: 
+        MYSQL_DB_HOST: "db.leave-module_default"
+        MYSQL_DB_USER: "root"
+        MYSQL_DB_PASS: "password"
+        MYSQL_DB_PORT: "3307"
+        MYSQL_DB_NAME: "leaves_module"
+      restart: always
+      volumes:
+        - .:/go/src/github.com/reemishirsath/leave-module
+      container_name: user_leaves_service
+      ports:
+        - "9001:9001"
+      tty: true
+      depends_on:
+        - db
+  leaves:
+      build:
+        context: .
+        dockerfile: Dockerfile_Leaves
+      environment: 
+        MYSQL_DB_HOST: "db.leave-module_default"
+        MYSQL_DB_USER: "root"
+        MYSQL_DB_PASS: "password"
+        MYSQL_DB_PORT: "3307"
+        MYSQL_DB_NAME: "leaves_module"
+      restart: always
+      volumes:
+        - .:/go/src/github.com/reemishirsath/leave-module
+      container_name: leaves_service
+      ports:
+        - "9002:9002"
+      tty: true
+      depends_on:
+        - db
+volumes:
+  leaves_module-db :

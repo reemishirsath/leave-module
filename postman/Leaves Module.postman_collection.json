@@ -1,0 +1,298 @@
+{
+	"info": {
+		"_postman_id": "fe451a7c-80cb-4c87-b604-60490d69b240",
+		"name": "Leaves Module",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Admin Login",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin@scalent.io",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "pass",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:9002/login",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Process Leave",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjEsInJvbGVJRCI6MSwiZXhwIjoxNTgwOTA1OTEzfQ.DHA_jTvWAgzDnABNxW5mDpRGzD-VQhOf8q78BDoY5i8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"APPROVED\",\n    \"feedback\": \"leave appr\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9002/leaves/3",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"leaves",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetLeavesByUserID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjEsInJvbGVJRCI6MSwiZXhwIjoxNTgxMTM4NDM2fQ.k--Tb9TknUxUQaSz616_c3pVCKGdC6YHKVQZrHxroE4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9002/leaves/user/2",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"leaves",
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetLeavesByStatus",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjEsInJvbGVJRCI6MSwiZXhwIjoxNTgwOTA1OTEzfQ.DHA_jTvWAgzDnABNxW5mDpRGzD-VQhOf8q78BDoY5i8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9002/leaves/user/2/approved",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"leaves",
+								"user",
+								"2",
+								"approved"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "user@scalent.io",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "pass",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:9001/login",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply Leave",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjIsInJvbGVJRCI6MiwiZXhwIjoxNTgwOTcwNTgzfQ.U8ruG22K4qUNEu3bQMCJnoNIGbVlGGCrC0reWFC6zRI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userID\":2,\n\t\"leaveReason\":\"Leave\",\n\t\"fromDate\":\"2020-02-10T00:00:00+05:30\",\n\t\"toDate\":\"2020-02-16T00:00:00+05:30\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9001/user/leaves",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"user",
+								"leaves"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllLeaves",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjIsInJvbGVJRCI6MiwiZXhwIjoxNTgwOTA3OTMwfQ.cfORJIOxmHZ6iwrdgLbVc9ajJco3fAPFiuOOrZoC-7c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9001/user/leaves",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"user",
+								"leaves"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetLeavesByStatus",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjIsInJvbGVJRCI6MiwiZXhwIjoxNTgwOTA5ODUxfQ.HA9CzomOGn2IUcrX-s02f5qtt37bdn6CzPWk7VJagLs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9001/user/leaves/applied",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"user",
+								"leaves",
+								"applied"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
